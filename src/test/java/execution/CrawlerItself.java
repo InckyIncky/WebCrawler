@@ -25,7 +25,7 @@ public class CrawlerItself extends BaseTest {
             bookUrls.add(webElement.getAttribute("href"));
 
         }
-        int i = 0;
+
         for (String bookUrl : bookUrls) {
             BookPage bookPage = new BookPage(bookUrl);
             book = bookPage.collectBookData();
