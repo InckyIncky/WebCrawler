@@ -1,4 +1,4 @@
-package util.webDriverFactory;
+package utility.webDriverFactory;
 
 public enum Browsers {
     CHROME,

@@ -1,4 +1,4 @@
-package util.webDriverFactory;
+package utility.webDriverFactory;
 
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.WebDriverManager;
