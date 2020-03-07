@@ -28,5 +28,7 @@ public class CrawlerItself extends BaseTest {
         logger.info("URL's got from WebElements");
 
         CsvWriter.createAndWrite(bookUrls);
+
+        logger.info("Books collected and saved in audio_books.csv");
     }
 }
