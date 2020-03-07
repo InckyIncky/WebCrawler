@@ -6,10 +6,8 @@ import org.apache.logging.log4j.core.config.Configurator;
 import org.apache.logging.log4j.core.config.builder.api.*;
 import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 
-import java.io.IOException;
-
 public class CrawlerLogger {
-    public static void test() throws IOException {
+    public static void initiateLogger() {
         ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
 
         AppenderComponentBuilder console = builder.newAppender("stdout", "Console")
@@ -19,10 +17,6 @@ public class CrawlerLogger {
                 addAttribute("pattern", "%d [%t] %-5level: %msg%n%throwable"));
         builder.add(console);
 
-        AppenderComponentBuilder file = builder.newAppender("log", "File");
-        file.addAttribute("filename", "logs/logging.log");
-
-        builder.add(file);
         LayoutComponentBuilder layoutBuilder = builder.newLayout("PatternLayout")
                 .addAttribute("pattern", "%d [%t] %-5level: %msg%n");
 
@@ -31,7 +25,7 @@ public class CrawlerLogger {
                 .addComponent(builder.newComponent("SizeBasedTriggeringPolicy").addAttribute("size", "100M"));
 
         AppenderComponentBuilder rollingFile = builder.newAppender("rolling", "RollingFile")
-                .addAttribute("fileName", "rolling.log")
+                .addAttribute("fileName", "logs/logging.log")
                 .addAttribute("filePattern", "rolling-%d{MM-dd-yy}.log.gz")
                 .addComponent(triggeringPolicy)
                 .addComponent(layoutBuilder);
@@ -45,10 +39,9 @@ public class CrawlerLogger {
         builder.add(rootLogger);
 
         LoggerComponentBuilder logger = builder.newLogger("com", Level.INFO);
-        logger.add(builder.newAppenderRef("log")).addAttribute("additivity", true);
-        builder.add(logger);
+        logger.add(builder.newAppenderRef("rolling")).addAttribute("additivity", false);
 
-        builder.writeXmlConfiguration(System.out);
+        builder.add(logger);
 
         Configurator.initialize(builder.build());
     }

@@ -9,22 +9,19 @@ import org.openqa.selenium.WebDriver;
 import utility.webDriverFactory.Browsers;
 import utility.webDriverFactory.WebDriverFactory;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static utility.logger.CrawlerLogger.test;
+import static utility.logger.CrawlerLogger.initiateLogger;
 
 
 public abstract class BaseTest {
     public static WebDriver driver;
-    static final Logger logger /*= LogManager.getLogger("ChromeTestLog")*/;
+    static final Logger logger;
 
     static {
-        try {
-            test();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            initiateLogger();
+
         logger = LogManager.getLogger("com");
     }
 

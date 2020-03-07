@@ -9,17 +9,17 @@ import utility.csvWriter.CsvWriter;
 
 public class CrawlerItself extends BaseTest {
     List<WebElement> bookWebElements;
-    List<Book> allBooks = new ArrayList();
+    List<String> bookUrls = new ArrayList();
 
     @Test
-    public void collectAllBooks() {
+    public void collectAllBooks() throws Exception {
         driver.get("https://www.mann-ivanov-ferber.ru/books/allbooks/?booktype=audiobook");
         logger.info("Page https://www.mann-ivanov-ferber.ru/books/allbooks/?booktype=audiobook opened");
 
         AudioBooksPage audioBooks = new AudioBooksPage();
         bookWebElements = audioBooks.collectBooks(driver);
         logger.info("WebElements collected");
-        List<String> bookUrls = new ArrayList();
+        logger.info("Count of books : " + bookWebElements.size());
 
         for (WebElement webElement : bookWebElements) {
             bookUrls.add(webElement.getAttribute("href"));
@@ -27,8 +27,6 @@ public class CrawlerItself extends BaseTest {
 
         logger.info("URL's got from WebElements");
 
-        CsvWriter.createAndStartWriting(bookUrls);
-
-        logger.info("Book data collected, books count : " + allBooks.size());
+        CsvWriter.createAndWrite(bookUrls);
     }
 }

@@ -8,6 +8,7 @@ public class Book {
     private String author;
     private double price;
     private String acquaintanceFragment;
+    private String errorMsg;
 
     public String getName() {
         return name;
@@ -29,6 +30,8 @@ public class Book {
         return acquaintanceFragment;
     }
 
+    public String getErrorMsg() { return  errorMsg; }
+
 
     public static class Builder extends BaseTest {
         private final Book newBook;
@@ -37,6 +40,7 @@ public class Book {
         private String author;
         private double price;
         private String acquaintanceFragment;
+        private String errorMsg;
 
         public Builder(String bookUrl) {
             newBook = new Book();
@@ -66,7 +70,11 @@ public class Book {
                 this.acquaintanceFragment = "Acquaintance fragment is not furnished";
             }
             return this;
+        }
 
+        public Builder addErrorMsg() {
+            this.errorMsg = "Book data is not collected";
+            return this;
         }
 
         public Book build() {
@@ -75,6 +83,7 @@ public class Book {
             newBook.price = this.price;
             newBook.bookUrl = this.bookUrl;
             newBook.acquaintanceFragment = this.acquaintanceFragment;
+            newBook.errorMsg = this.errorMsg;
             return newBook;
         }
 

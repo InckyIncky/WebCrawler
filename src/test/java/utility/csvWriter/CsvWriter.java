@@ -14,14 +14,18 @@ public class CsvWriter {
     public static Book book;
 
 
-    public static void createAndStartWriting(List<String> bookUrls) {
+    public static void createAndWrite(List<String> bookUrls) throws Exception{
         try (
                 FileWriter fw = new FileWriter(csv, true);
                 CSVWriter writer = new CSVWriter(fw, ',')) {
             for (String bookUrl : bookUrls) {
                 BookPage bookPage = new BookPage(bookUrl);
-                book = bookPage.collectBookData();
-                CsvWriter.addBookToCsv(book, writer);
+                try {
+                    book = bookPage.collectBookData();
+                    CsvWriter.addBookToCsv(book, writer);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         } catch (
                 IOException e) {
@@ -32,9 +36,8 @@ public class CsvWriter {
 
     public static void addBookToCsv(Book book, CSVWriter writer) {
 
-        String[] record = new String[]{book.getName(), book.getAuthor(), String.valueOf(book.getPrice()), book.getAcquaintanceFragment(), book.getBookUrl()};
+        String[] record = new String[]{book.getErrorMsg(), book.getName(), book.getAuthor(), String.valueOf(book.getPrice()), book.getAcquaintanceFragment(), book.getBookUrl()};
 
         writer.writeNext(record);
     }
-
 }

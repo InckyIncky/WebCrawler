@@ -24,7 +24,7 @@ public class AudioBooksPage extends BaseTest {
     }
 
     public List<WebElement> collectBooks(WebDriver driver) {
-        WebElement pageLoader = driver.findElement(By.cssSelector("div[class='js-page-loader page-loader']"));
+        WebElement pageLoader = driver.findElement(By.cssSelector("div.js-page-loader.page-loader"));
 
         while (pageLoader.isDisplayed()) {
             action.moveToElement(pageLoader).perform();
