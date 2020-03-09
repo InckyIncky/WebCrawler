@@ -9,12 +9,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvWriter {
-
-    public static final String csv = "audio_books.csv";
     public static Book book;
 
 
-    public static void createAndWrite(List<String> bookUrls) throws Exception{
+    public static void createAndWrite(List<String> bookUrls, String csv) throws Exception{
         try (
                 FileWriter fw = new FileWriter(csv, true);
                 CSVWriter writer = new CSVWriter(fw, ',')) {

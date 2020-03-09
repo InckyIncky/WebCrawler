@@ -16,6 +16,7 @@ import static utility.logger.CrawlerLogger.initiateLogger;
 
 public abstract class BaseTest {
     public static WebDriver driver;
+
     static final Logger logger;
 
     static {
@@ -24,6 +25,7 @@ public abstract class BaseTest {
 
         logger = LogManager.getLogger("com");
     }
+
 
     @BeforeAll
     public static void setUp() {
