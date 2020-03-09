@@ -18,8 +18,7 @@ public class CrawlerItself extends BaseTest {
 
     @Test
     public void collectAllBooks() throws Exception {
-//        cfg = ConfigFactory.create(MyConfigs.class);
-//        driver.get("https://www.mann-ivanov-ferber.ru/books/allbooks/?booktype=audiobook");
+
         driver.get(cfg.targetURL());
         logger.info("Page https://www.mann-ivanov-ferber.ru/books/allbooks/?booktype=audiobook opened");
 
